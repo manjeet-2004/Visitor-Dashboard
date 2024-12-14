@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Museum Exhibit Experience</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      color: #212529;
+    }
+
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://example.com/image.jpg') no-repeat center center;
+      background-size: cover;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      border-bottom: 5px solid #007bff;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-report {
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      padding: 10px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .btn-report:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+
+    .btn-feedback {
+      background-color: #dc3545;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-feedback:hover {
+      background-color: #a71d2a;
+    }
+
+    .card {
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      background-color: #ffffff;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #495057;
+    }
+
+    footer {
+      background-color: #212529;
+      color: #adb5bd;
+      padding: 20px 0;
+      text-align: center;
+      border-top: 5px solid #007bff;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    .hidden-section {
+      display: none;
+    }
+
+    .profile-section {
+      padding: 20px;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #ffffff;
+    }
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      margin-bottom: 10px;
+    }
+
+    .exhibit-section {
+      padding: 20px;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .exhibit-section h4 {
+      font-weight: bold;
+    }
+
+    .exhibit-section p {
+      margin-bottom: 10px;
+    }
+
+    .artifact-details {
+      padding: 20px;
+      border: 1px solid #e9ecef;
+      border-radius: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    .artifact-details img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Museum</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="visitorMenu" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Visitor Dashboard
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="visitorMenu">
+              <li><a class="dropdown-item" href="#" onclick="showSection('history')">Report History</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showSection('status')">Report Status</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showSection('halloffame')">Hall of Fame</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showSection('profile')">Profile</a></li>
+              <li><a class="dropdown-item" href="#" onclick="showSection('exhibits')">Exhibit Data</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <h1>Welcome to the Museum</h1>
+    <p>Scan QR codes at exhibits to learn more and report any issues in real-time.</p>
+  </div>
+
+  <div class="container mt-5">
+    <div id="profile" class="hidden-section">
+      <div class="profile-section">
+        <h3>Visitor Profile</h3>
+        <form id="profileForm">
+          <div class="mb-3">
+            <label for="profilePicture" class="form-label">Profile Picture</label>
+            <input type="file" class="form-control" id="profilePicture" accept="image/*">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+          </div>
+          <button type="submit" class="btn btn-primary">Save Profile</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="exhibits" class="hidden-section">
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact1')">Exhibit 1: Ancient Artifacts</a></h4>
+        <p>Description: A collection of artifacts from ancient civilizations, showcasing their culture and daily life.</p>
+        <p>Location: Hall A</p>
+      </div>
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact2')">Exhibit 2: Modern Art</a></h4>
+        <p>Description: Explore contemporary art pieces from renowned artists worldwide.</p>
+        <p>Location: Hall B</p>
+      </div>
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact3')">Exhibit 3: Space Exploration</a></h4>
+        <p>Description: Learn about humanity's journey to the stars through interactive displays and models.</p>
+        <p>Location: Hall C</p>
+      </div>
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact4')">Exhibit 4: Terracotta Warriors</a></h4>
+        <p>Description: Discover the iconic terracotta army of China, crafted to guard Emperor Qin Shi Huang in the afterlife.</p>
+        <p>Location: Hall D</p>
+      </div>
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact5')">Exhibit 5: Ancient Pottery</a></h4>
+        <p>Description: A fascinating collection of pottery and ceramics from various ancient cultures.</p>
+        <p>Location: Hall E</p>
+      </div>
+      <div class="exhibit-section">
+        <h4><a href="#" onclick="showArtifactDetails('artifact6')">Exhibit 6: Prehistoric Tools</a></h4>
+        <p>Description: A glimpse into the tools and technologies used by early humans to survive and thrive.</p>
+        <p>Location: Hall F</p>
+      </div>
+    </div>
+
+    <div id="artifact1" class="hidden-section artifact-details">
+      <h4>Artifact: Nok Terracotta</h4>
+      <img src="image.jpeg" alt="Nok Terracotta"style="width: 60%; height: 60%;">>
+      <p><strong>Description:</strong> Nok terracotta sculptures are the earliest-known sculptures from sub-Saharan Africa, created by the Nok culture of which little is known except their ironworking and terracotta sculptures that flourished circa 1500 BCE to 1 BCE. The sculptures are figurative, with the heads or figures of humans represented, as well as animals, each unique. First discovered in Nigeria, they were coil-built, a common technique for pottery, and often hollow. Their function is not known, but they may have been used for funerary purposes, as some have been found in burials. Most that have been found are broken and fragmented, with the bodies unattached from the heads or the only remaining pieces being sherds, and are no longer smooth. Both men and women are represented. The human representations include adornments such as jewelry and elaborate hairstyles, pointing to the importance of personal adornment in the Nok culture. Others include ‘flaws,’ such as representations of people suffering from disease or paralysis featured in the sculptures. Common features of Nok terracotta work include triangular eyes, perforated/ruptured pupils, and mostly abstract features. Scholars have suggested there were likely earlier art traditions that preceded this terracotta work of the Nok, but any artifacts are unknown. Therefore, these sculptures are one of the better sources regarding the art of the Nok culture and ancient sub-Saharan Africa.</p>
+      <div class="text-center">
+      <button class="btn btn-feedback" onclick="window.open('https://forms.gle/PAXnqxWzLTEJSibMA')">Give Feedback</button>
+      </div>
+
+
+
+      <img src="image2.jpeg" alt="Phonecian" style="width: 60%; height: 60%;">>
+      <h4>Artifact: Phonecian</h4>
+      <p><strong>Description:</strong> Small yet intricately crafted bead exemplifies the artistic ingenuity of Phoenician artisans during the first millennium BCE. Measuring 2.7 cm in length and 2.4 cm in diameter, the bead features a striking depiction of a human face, rendered using vibrant glass in a mosaic technique. The glass is meticulously applied onto a ceramic tube base, showcasing the Phoenicians’ mastery of glassworking and their ability to create detailed ornamentation by hand. The bead's iconography a human face may have held symbolic significance, possibly serving as an amulet for protection or a decorative element in personal adornments. The Phoenicians were renowned for their craftsmanship and far-reaching trade networks, and this artifact, originating from Maikop in the Kuban region, highlights their influence and cultural connections across the Mediterranean and beyond.</p>
+      <div class="text-center">
+      <button class="btn btn-feedback" onclick="window.open('https://forms.gle/PAXnqxWzLTEJSibMA')">Give Feedback</button>
+      </div>
+
+
+      <img src="image3.jpeg" alt="Etruscan art" style="width: 60%; height: 60%;">
+      <h4>Artifact: Etrusan art</h4>
+      <p><strong>Description:</strong>Etruscan art was produced by the Etruscan civilization in central Italy between the 10th and 1st centuries BC. From around 750 BC it was heavily influenced by Greek art, which was imported by the Etruscans, but always retained distinct characteristics. Particularly strong in this tradition were figurative sculpture in terracotta, wall-painting and metalworking.
+        Women's role and image evolved during the millennium of the Etruscan period. Affluent women were well-groomed and lived a family life within society, where their role was important both politically and administratively. Tanaquil and Velia Spurinna [fr] were among the women who played leading roles in Etruscan politics. In the final phase of Etruscan history, women lost much of their independence amidst conquest by the Roman Republic, and their status became that of Roman women. </p>
+        <div class="text-center">
+      <button class="btn btn-feedback" onclick="window.open('https://forms.gle/PAXnqxWzLTEJSibMA')">Give Feedback</button>
+    </div>
+    </div>
+    
+
+    <div id="artifact2" class="hidden-section artifact-details">
+      <h4>Artifact: Modern Art Installation</h4>
+      <img src="https://example.com/modern-art.jpg" alt="Modern Art">
+      <p><strong>Description:</strong> A striking modern art installation symbolizing the confluence of tradition and innovation in contemporary creativity.</p>
+      <button class="btn btn-feedback" onclick="window.open('https://www.google.com', '_blank')">Give Feedback</button>
+    </div>
+
+    <div id="artifact3" class="hidden-section artifact-details">
+      <h4>Artifact: Space Shuttle Model</h4>
+      <img src="https://example.com/space-shuttle.jpg" alt="Space Shuttle Model">
+      <p><strong>Description:</strong> A meticulously crafted model of a space shuttle, representing humanity's bold strides into the cosmos.</p>
+      <button class="btn btn-feedback" onclick="window.open('https://www.google.com', '_blank')">Give Feedback</button>
+    </div>
+
+    <div id="artifact4" class="hidden-section artifact-details">
+      <h4>Artifact: Terracotta Warrior</h4>
+      <img src="https://example.com/terracotta-warrior.jpg" alt="Terracotta Warrior">
+      <p><strong>Description:</strong> An iconic terracotta warrior sculpture from the mausoleum of Emperor Qin Shi Huang.</p>
+      <button class="btn btn-feedback" onclick="window.open('https://www.google.com', '_blank')">Give Feedback</button>
+    </div>
+
+    <div id="artifact5" class="hidden-section artifact-details">
+      <h4>Artifact: Ancient Pottery Vase</h4>
+      <img src="https://example.com/ancient-pottery.jpg" alt="Ancient Pottery Vase">
+      <p><strong>Description:</strong> A stunning ancient pottery vase displaying intricate designs and craftsmanship from a bygone era.</p>
+      <button class="btn btn-feedback" onclick="window.open('https://www.google.com', '_blank')">Give Feedback</button>
+    </div>
+
+    <div id="artifact6" class="hidden-section artifact-details">
+      <h4>Artifact: Stone Tools</h4>
+      <img src="https://example.com/stone-tools.jpg" alt="Stone Tools">
+      <p><strong>Description:</strong> A collection of stone tools showcasing early human ingenuity and adaptability.</p>
+      <button class="btn btn-feedback" onclick="window.open('https://www.google.com', '_blank')">Give Feedback</button>
+    </div>
+  </div>
+  <div id="status" class="hidden-section">
+    <h3>Report Status</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Exhibit</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        </table>
+        </div>
+        <div id="history" class="hidden-section">
+          <h3>Report History</h3>
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Exhibit</th>
+                      <th>Issue Description</th>
+                      <th>Date Reported</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <!-- Example Report Entry -->
+                  <tr>
+                      <td>1</td>
+                      <td>Dinosaur Exhibit</td>
+                      <td>Broken display screen</td>
+                      <td>2024-12-10</td>
+                  </tr>
+                  <!-- Add dynamic rows here -->
+              </tbody>
+          </table>
+      </div>
+      <div id="halloffame" class="hidden-section">
+        <h3>Hall of Fame</h3>
+        <ul id="halloffame-list">
+            <!-- Hall of Fame will be dynamically loaded here -->
+        </ul>
+    </div>
+</div>
+</div>
+
+
+  <footer class="text-center mt-5 py-4">
+    <p>&copy; 2024 Museum Experience | Designed for Visitor Engagement</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('.hidden-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
+    }
+
+    function showArtifactDetails(artifactId) {
+      showSection(artifactId);
+    }
+
+    document.getElementById('profileForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const profilePicture = document.getElementById('profilePicture').files[0];
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+
+      console.log('Profile saved:', { profilePicture, email, phone });
+      alert('Profile saved successfully!');
+    });
+  </script>
+</body>
+
+</html>
